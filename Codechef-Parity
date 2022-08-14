@@ -1,0 +1,55 @@
+n = int(input())
+l = []
+for x in range(0, n):
+    m = int(input())
+    l.append(input().split())
+
+
+def parity(s):
+    odd = 0
+    even = 0
+    for x in s:
+        if (int(x)) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    if odd == len(s) or even == len(s):
+        return True
+    else:
+        return False
+
+
+def operate(s):
+    r = []
+    iOdd = []
+    iEven = []
+    for index, x in enumerate(s):
+        if int(x) % 2 != 0:
+            iOdd.append(index)
+        else:
+            iEven.append(index)
+    if len(iOdd) >= 2:
+        x = int(s[iOdd[0]]) + int(s[iOdd[1]])
+        for i, ch in enumerate(s):
+            if i == iOdd[0] or i == iOdd[1]:
+                continue
+            else:
+                r.append(ch)
+        r.append(x)
+    else:
+        x = int(s[iEven[0]]) + int(s[iEven[1]])
+        for i, ch in enumerate(s):
+            if i == iOdd[0] or i == iEven[0]:
+                continue
+            else:
+                r.append(ch)
+        r.append(x)
+    return r
+
+
+for s in l:
+    count = 0
+    while not parity(s):
+        count += 1
+        operate(s)
+    print(count)
